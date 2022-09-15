@@ -12,6 +12,8 @@ import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {Page1Component} from "./pages/page1/page1.component";
 import {SharedModule} from "./shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {NgTinyUrlModule} from "ng-tiny-url";
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
       key: [FormsState],
     }),
     FormsModule,
+    NgTinyUrlModule,
     ReactiveFormsModule,
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),

@@ -1,41 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import {Store} from "@ngxs/store";
+import {Component, OnInit} from '@angular/core';
+import {Select, Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {FormsState} from "../../state/forms/form.state";
+import {BehaviorSubject, Observable, tap} from "rxjs";
+import {FormsStateModel} from "../../state/forms/form.state.model";
+import {DeepLinkGeneratorService} from "../../shared/deep-link-generator/deep-link-generator.service";
 
 @Component({
   selector: 'app-page1',
   templateUrl: './page1.component.html'
 })
-export class Page1Component {
-  public firstForm: FormGroup;
-  public secondForm: FormGroup;
-  public thirdForm: FormGroup;
+export class Page1Component implements OnInit {
+  public firstForm: UntypedFormGroup;
+  public secondForm: UntypedFormGroup;
+  public thirdForm: UntypedFormGroup;
 
-  constructor(private readonly formBuilder: FormBuilder,
-              private readonly store:Store) {
+  public state: string = '';
+  public encryptedUrl: string = '';
+  public secretKey: string = '';
+  public url$: Observable<string> = new Observable<string>();
+
+  @Select(FormsState.getFormState) public state$?: Observable<FormsStateModel>;
+
+  constructor(private readonly formBuilder: UntypedFormBuilder,
+              private readonly store: Store,
+              private readonly urlGenerator: DeepLinkGeneratorService) {
 
     this.firstForm = this.formBuilder.group({
-      vorname: new FormControl('', []),
-      nachname: new FormControl('', []),
-      alter: new FormControl('', []),
+      vorname: new UntypedFormControl('', []),
+      nachname: new UntypedFormControl('', []),
+      alter: new UntypedFormControl('', []),
     });
 
     this.secondForm = this.formBuilder.group({
-      email: new FormControl('', []),
-      strasse: new FormControl('', []),
-      strasseNr: new FormControl('', []),
-      plz: new FormControl('', []),
-      stadt: new FormControl('', []),
+      email: new UntypedFormControl('', []),
+      strasse: new UntypedFormControl('', []),
+      strasseNr: new UntypedFormControl('', []),
+      plz: new UntypedFormControl('', []),
+      stadt: new UntypedFormControl('', []),
     });
 
     this.thirdForm = this.formBuilder.group({
-      schaden: new FormControl('', []),
-      files: new FormControl('', []),
+      schaden: new UntypedFormControl('', []),
+      files: new UntypedFormControl('', []),
     });
   }
 
-  public navigate():void {
+  public ngOnInit(): void {
+    this.state$?.pipe(
+      tap((state) => {
+
+        const {
+          encrypted,
+          key
+        }: { encrypted: string, key: string } = this.urlGenerator.generateUrl(JSON.stringify(state));
+
+        this.encryptedUrl = encrypted;
+        this.secretKey = key;
+        this.url$ = this.urlGenerator.minifyUrl(`https://www.generali.de/enigma/"${this.encryptedUrl}"`)
+      })
+    ).subscribe();
+
+
+
+    this.url$.subscribe(e => {
+      console.log('subscribe url: ', e)
+    });
+  }
+
+  public navigate(): void {
     this.store.dispatch(new Navigate(['page2']));
   }
 }
