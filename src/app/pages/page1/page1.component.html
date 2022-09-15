@@ -48,5 +48,6 @@
 
 <p>{{state$ | async | json}}</p>
 
-<p>{{url$ | async}}</p>
+<p>{{urlAsString}}</p>
 <p>{{secretKey}}</p>
+<qrcode [qrdata]="(url$ | async) || ''" [allowEmptyString]="true" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>

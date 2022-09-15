@@ -3,7 +3,7 @@ import {Select, Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {FormsState} from "../../state/forms/form.state";
-import {BehaviorSubject, Observable, tap} from "rxjs";
+import {BehaviorSubject, Observable, of, tap} from "rxjs";
 import {FormsStateModel} from "../../state/forms/form.state.model";
 import {DeepLinkGeneratorService} from "../../shared/deep-link-generator/deep-link-generator.service";
 
@@ -19,7 +19,8 @@ export class Page1Component implements OnInit {
   public state: string = '';
   public encryptedUrl: string = '';
   public secretKey: string = '';
-  public url$: Observable<string> = new Observable<string>();
+  public url$: Observable<string> = of('');
+  public urlAsString:string='';
 
   @Select(FormsState.getFormState) public state$?: Observable<FormsStateModel>;
 
@@ -65,6 +66,7 @@ export class Page1Component implements OnInit {
 
 
     this.url$.subscribe(e => {
+      this.urlAsString = e;
       console.log('subscribe url: ', e)
     });
   }

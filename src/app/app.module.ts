@@ -14,6 +14,7 @@ import {SharedModule} from "./shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {NgTinyUrlModule} from "ng-tiny-url";
+import {QRCodeModule} from "angularx-qrcode";
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {NgTinyUrlModule} from "ng-tiny-url";
     }),
     FormsModule,
     NgTinyUrlModule,
+    QRCodeModule,
     ReactiveFormsModule,
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsRouterPluginModule.forRoot(),
