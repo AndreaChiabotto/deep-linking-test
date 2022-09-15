@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+  box-sizing: border-box;
+}
+
+body{
+  text-align: center;
+  padding: 20px 20% 0;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+h2{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+button, .secondary{
+  background: tomato;
+  font-size: 18px;
+  font-style: italic;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 3px;
+  margin: 5px 10px 0;
+}
+
+.secondary {
+  background: white;
+  border:2px solid tomato;
+  margin: 0 0 40px;
+}
+
+hr{
+  display: block;
+  width: 100%;
+  margin: 50px auto;
+}
+
+label {
+  text-align: left;
+  margin-bottom: 5px;
+  display: block;
+  font-weight: bold;
+}
+
+input, select{
+  display: block;
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,47 @@
+<h1>A very long Form</h1>
+
+<form [formGroup]="firstForm" ngxsForm="formsStateModel.firstForm">
+  <label for="vorname">Vorname</label>
+  <input  type="text" formControlName="vorname" id="vorname">
+  <label for="nachname">Nachname</label>
+  <input type="text" formControlName="nachname" id="nachname" >
+  <label for="alter">Alter</label>
+  <input  type="number" formControlName="alter" id="alter" >
+</form>
+
+<hr>
+
+<form [formGroup]="secondForm" ngxsForm="formsStateModel.secondForm">
+  <label for="email">Email</label>
+  <input type="email" id="email" formControlName="email">
+
+  <label for="strasse">Strasse</label>
+  <input type="text" formControlName="strasse" id="strasse" >
+
+  <label for="strasseNr">Nr</label>
+  <input  type="number" formControlName="strasseNr" id="strasseNr" >
+
+  <label for="plz">Postleizahl</label>
+  <input  type="number" formControlName="plz" id="plz" >
+
+  <label for="stadt">Stadt</label>
+  <input type="text" formControlName="stadt" id="stadt" >
+</form>
+
+<hr>
+
+<form [formGroup]="thirdForm" ngxsForm="formsStateModel.thirdForm">
+  <label for="schaden">Schaden:</label>
+
+  <select name="schaden" formControlName="schaden" id="schaden">
+    <option value="Schaden 1">Schaden 1</option>
+    <option value="Schaden 2">Schaden 2</option>
+    <option value="Schaden 3">Schaden 3</option>
+    <option value="Schaden 4">Schaden 4</option>
+  </select>
+
+  <label for="files">Files:</label>
+  <input type="text" formControlName="files" id="files" >
+  <div style="text-align: left"><button class="secondary">lade etwas</button></div>
+
+</form>
