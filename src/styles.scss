@@ -63,3 +63,15 @@ input, select{
   padding: 5px 10px;
   margin-bottom: 20px;
 }
+
+
+.col{
+  width: 50%;
+  display: inline-block;
+}
+
+textarea{
+  display: block;
+  width: 100%;
+  height: auto;
+}

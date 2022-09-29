@@ -48,6 +48,23 @@
 
 <p>{{state$ | async | json}}</p>
 
-<p>{{urlAsString}}</p>
-<p>{{secretKey}}</p>
-<qrcode [qrdata]="(url$ | async) || ''" [allowEmptyString]="true" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+<h2>State</h2>
+<p>{{state}}</p>
+
+<div class="col">
+<h2>encrypted state</h2>
+<textarea>{{encryptedState}}</textarea>
+</div>
+ <div class="col">
+   <h2>Schlüsseln</h2>
+   <p>{{secretKey}}</p>
+ </div>
+
+<div class="col">
+<p>{{url || 'not defined yet'}}</p>
+</div>
+
+<div class="col">
+
+<qrcode [qrdata]="url" [allowEmptyString]="true" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+</div>
