@@ -67,10 +67,14 @@ export class Page1Component implements OnInit {
       mergeMap(obj => {
         return combineLatest(
           of(obj),
-          this.urlGenerator.minifyUrl(`https:/www.test.de/${obj.encrypted}`))
+          this.urlGenerator.minifyUrl(`localhost:4200/decrypt?s=${obj.encrypted}`))
       }),
       map(obj => ( {encryptedState: obj[0].encrypted, key: obj[0].key, url: obj[1]}))
     ).subscribe(e => {
+
+      console.log(this.urlGenerator.decryptUrl(e.encryptedState, e.key));
+      console.log('---');
+
       this.secretKey = e.key;
       this.encryptedState = e.encryptedState
       this.url = e.url;

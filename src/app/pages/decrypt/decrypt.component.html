@@ -1,0 +1,8 @@
+<h1>Are you read for some magic?</h1>
+
+<form [formGroup]="enigma">
+  <label for="decrypt">Schlüsselwort:</label>
+  <input  type="text" formControlName="decrypt" id="decrypt">
+</form>
+
+<button (click)="decrypt()">jetzt entschlüsseln</button>

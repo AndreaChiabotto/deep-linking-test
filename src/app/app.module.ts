@@ -12,14 +12,15 @@ import {NgxsReduxDevtoolsPluginModule} from "@ngxs/devtools-plugin";
 import {Page1Component} from "./pages/page1/page1.component";
 import {SharedModule} from "./shared/shared.module";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
 import {NgTinyUrlModule} from "ng-tiny-url";
 import {QRCodeModule} from "angularx-qrcode";
+import {DecryptComponent} from "./pages/decrypt/decrypt.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    Page1Component
+    Page1Component,
+    DecryptComponent
   ],
   imports: [
     BrowserModule,
