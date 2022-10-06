@@ -27,6 +27,8 @@ export class FormsState {
     { setState }: StateContext<FormsStateModel>,
     { variant }: Forms.SetState
   ): void {
+
+    console.log('action here:', variant);
     setState((state: FormsStateModel) => {
       state.firstForm = variant.firstForm;
       state.secondForm = variant.secondForm;

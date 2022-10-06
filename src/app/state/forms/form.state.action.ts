@@ -12,5 +12,4 @@ export namespace Forms {
     public static readonly type: string = `${TYPE_PREFIX} set State from param`;
     constructor(public variant: FormsStateModel) {}
   }
-
 }

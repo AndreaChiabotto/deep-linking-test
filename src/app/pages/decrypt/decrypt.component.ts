@@ -3,7 +3,8 @@ import {Select, Store} from "@ngxs/store";
 import {Navigate} from "@ngxs/router-plugin";
 import {UntypedFormBuilder, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {FormsState} from "../../state/forms/form.state";
-import { combineLatest,
+import {
+  combineLatest,
   map,
   mergeMap,
   Observable,
@@ -12,6 +13,8 @@ import { combineLatest,
 import {FormsStateModel} from "../../state/forms/form.state.model";
 import {DeepLinkGeneratorService} from "../../shared/deep-link-generator/deep-link-generator.service";
 import {ActivatedRoute} from "@angular/router";
+import {Forms} from "../../state/forms/form.state.action";
+import SetState = Forms.SetState;
 
 @Component({
   selector: 'app-page1',
@@ -37,14 +40,20 @@ export class DecryptComponent implements OnInit {
   public ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-          this.encryptedState = params['s'];
-          console.log(this.encryptedState);
+          this.encryptedState = decodeURIComponent(params['s']);
+          console.log(this.encryptedState)
         }
       );
   }
 
   public decrypt(): void {
-    console.log(this.encryptedState,  this.enigma.get('decrypt')?.value);
-console.log(this.urlGenerator.decryptUrl(JSON.stringify( this.encryptedState ), this.enigma.get('decrypt')?.value))
+    console.log(this.encryptedState, this.enigma.get('decrypt')?.value);
+
+    const test: string = this.urlGenerator.decryptUrl(this.encryptedState, this.enigma.get('decrypt')?.value);
+    console.log(this.encryptedState + '   ------   ' + this.enigma.get('decrypt')?.value + '   ------   ' + test)
+    const newState:FormsStateModel = JSON.parse(test);
+
+    this.store.dispatch(new SetState(newState));
+    this.store.dispatch(new Navigate(['page1']));
   }
 }

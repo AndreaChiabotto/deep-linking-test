@@ -53,7 +53,10 @@
 
 <div class="col">
 <h2>encrypted state</h2>
-<textarea>{{encryptedState}}</textarea>
+<textarea >{{encryptedState}}</textarea>
+</div><div class="col">
+<h2>encrypted state</h2>
+<textarea>{{encryptedStateEncoded}}</textarea>
 </div>
  <div class="col">
    <h2>Schlüsseln</h2>
@@ -61,10 +64,11 @@
  </div>
 
 <div class="col">
+  <h2>URL</h2>
 <p>{{url || 'not defined yet'}}</p>
 </div>
 
 <div class="col">
-
+  <h2>QR CODE</h2>
 <qrcode [qrdata]="url" [allowEmptyString]="true" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
 </div>

@@ -30,6 +30,7 @@ export class Page1Component implements OnInit {
 
   public state: string = '';
   public encryptedState: string = '';
+  public encryptedStateEncoded: string = '';
   public secretKey: string = '';
   public url: string = '';
 
@@ -67,22 +68,20 @@ export class Page1Component implements OnInit {
       mergeMap(obj => {
         return combineLatest(
           of(obj),
-          this.urlGenerator.minifyUrl(`localhost:4200/decrypt?s=${obj.encrypted}`))
+          this.urlGenerator.minifyUrl(`https://deep-linking-state.vercel.app/decrypt?s=${encodeURIComponent(obj.encrypted)}`))
       }),
       map(obj => ( {encryptedState: obj[0].encrypted, key: obj[0].key, url: obj[1]}))
     ).subscribe(e => {
-
-      console.log(this.urlGenerator.decryptUrl(e.encryptedState, e.key));
-      console.log('---');
-
       this.secretKey = e.key;
-      this.encryptedState = e.encryptedState
+      this.encryptedState = e.encryptedState;
+      this.encryptedStateEncoded = encodeURIComponent(e.encryptedState);
       this.url = e.url;
+
+
+      const test:string = this.urlGenerator.decryptUrl(this.encryptedState, this.secretKey);
+      console.log(this.encryptedState + '   ------   ' + this.secretKey + '   ------   ' + test);
+      console.log('################')
       }
     );
-  }
-
-  public navigate(): void {
-    this.store.dispatch(new Navigate(['page2']));
   }
 }
