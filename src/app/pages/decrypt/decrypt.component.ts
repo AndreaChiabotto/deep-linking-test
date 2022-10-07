@@ -41,17 +41,13 @@ export class DecryptComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
           this.encryptedState = decodeURIComponent(params['s']);
-          console.log(this.encryptedState)
         }
       );
   }
 
   public decrypt(): void {
-    console.log(this.encryptedState, this.enigma.get('decrypt')?.value);
-
-    const test: string = this.urlGenerator.decryptUrl(this.encryptedState, this.enigma.get('decrypt')?.value);
-    console.log(this.encryptedState + '   ------   ' + this.enigma.get('decrypt')?.value + '   ------   ' + test)
-    const newState:FormsStateModel = JSON.parse(test);
+    const stateAsString: string = this.urlGenerator.decryptUrl(this.encryptedState, this.enigma.get('decrypt')?.value);
+    const newState: FormsStateModel = JSON.parse(stateAsString);
 
     this.store.dispatch(new SetState(newState));
     this.store.dispatch(new Navigate(['page1']));

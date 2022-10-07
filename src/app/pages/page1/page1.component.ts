@@ -61,8 +61,6 @@ export class Page1Component implements OnInit {
   }
 
   public ngOnInit(): void {
-    // @ts-ignore
-
     this.state$?.pipe(
       map(state => this.urlGenerator.generateUrl(JSON.stringify(state))),
       mergeMap(obj => {
@@ -76,11 +74,6 @@ export class Page1Component implements OnInit {
       this.encryptedState = e.encryptedState;
       this.encryptedStateEncoded = encodeURIComponent(e.encryptedState);
       this.url = e.url;
-
-
-      const test:string = this.urlGenerator.decryptUrl(this.encryptedState, this.secretKey);
-      console.log(this.encryptedState + '   ------   ' + this.secretKey + '   ------   ' + test);
-      console.log('################')
       }
     );
   }
